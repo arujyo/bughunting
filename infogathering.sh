@@ -51,6 +51,10 @@ cat ./aquatone_results/aquatone_urls.txt | waybackurls > urls
 
 ######################auto_gf  Start ###################
 auto_gf urls
+#ffuf lfi finding#############
+ffuf -w /usr/share/seclists/Fuzzing/LFI/LFI-linux-and-windows_by-1N3@CrowdShield.txt:FUZZ -w ./paramiters/lfi.txt:URL -u URLFUZZ -mc 200 -of csv -o lfi-result.txt
+#ffuf sqli Start##############
+ ffuf -w /usr/share/seclists/Fuzzing/SQLi/quick-SQLi.txt:FUZZ -w ./paramiters/sqli.txt:URL -u URLFUZZ -mc 200 -of csv -o sqli-result.txt
 #dalfox xss Start ############
  sudo dalfox file paramiters/xss.txt
 
