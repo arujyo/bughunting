@@ -43,5 +43,11 @@ echo "Live subdomains saved in: $LIVE_OUTPUT"
 
 #aquatone find all live interesting subdomains for you baby 
 cat  ./subdomain_results/live.txt | aquatone -out aquatone_results
-#Start find all urls using waybackurls 
+################################# Find all urls using waybackurls  Start ###########################    
 cat ./aquatone_results/aquatone_urls.txt | waybackurls > urls 
+
+######################auto_gf  Start ###################
+auto_gf urls
+######################## Nuclei Start ##################
+sudo nuclei -l subdomain_results/all_subdomains.txt -o nuclei.out
+
