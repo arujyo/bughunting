@@ -30,7 +30,8 @@ subfinder -d $DOMAIN -o $SUBFINDER_OUTPUT
 # Combine results
 echo "[*] Combining results..."
 cat $ASSETFINDER_OUTPUT $SUBFINDER_OUTPUT | sort -u > $FINAL_OUTPUT
-
+echo "[*] Running paramspider..."
+sudo paramspider -d $DOMAIN
 # Check for live subdomains
 echo "[*] Checking for live subdomains..."
 cat $FINAL_OUTPUT | httprobe > $LIVE_OUTPUT
@@ -50,7 +51,7 @@ echo "################################# Find all urls using waybackurls  Start #
 cat ./aquatone_results/aquatone_urls.txt | waybackurls > urls 
 
 echo "######################auto_gf  Start ###################"
-auto_gf urls
+auto_gf ./results/$DOMAIN.*
 echo "#ffuf lfi finding#############"
 ffuf -w /usr/share/seclists/Fuzzing/LFI/LFI-linux-and-windows_by-1N3@CrowdShield.txt:FUZZ -w ./paramiters/lfi.txt:URL -u URLFUZZ -mc 200 -of csv -o lfi-result.txt
 echo"#ffuf sqli Start##############"
